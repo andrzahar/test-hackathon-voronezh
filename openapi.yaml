@@ -91,15 +91,19 @@ paths:
         content:
           application/json:
             schema:
-              description: flight number
-              type: string
+              type: object
+              properties:
+                firstFlight:
+                  type: string
+                secondFlight:
+                  type: string
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FlightInfo'
+                $ref: '#/components/schemas/Adventure'
         '405':
           description: Invalid input
   /user/adventure/preferences:
@@ -111,7 +115,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: flightNumber
+        - name: adventureId
           in: header
           required: true
           schema:
@@ -126,10 +130,6 @@ paths:
       responses:
         '200':
           description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlightInfo'
         '405':
           description: Invalid input
   /user/adventure/route:
@@ -141,7 +141,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: flightNumber
+        - name: adventureId
           in: header
           required: true
           schema:
@@ -185,6 +185,15 @@ components:
       properties:
         name:
           type: string
+    Adventure:
+      type: object
+      properties:
+        adventureId:
+          type: string
+        firstFlight:
+          $ref: '#/components/schemas/FlightInfo'
+        secondFlight:
+          $ref: '#/components/schemas/FlightInfo'
     FlightInfo:
       type: object
       properties:
