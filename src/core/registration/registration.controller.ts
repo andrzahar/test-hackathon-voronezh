@@ -5,16 +5,17 @@ import {
   HttpStatus,
   Post,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { SignInDto } from './dto/signIn.dto';
+import { RegistrationService } from './registration.service';
+import { RegistrationDTO } from './dto/registration.dto';
 
-@Controller('auth')
-export class AuthController {
-  constructor(private authService: AuthService) {}
+@Controller('registration')
+export class RegistrationController {
+  constructor(private registrationService: RegistrationService) {}
+
   @Post()
-  async signIn(@Body() signInDTO: SignInDto) {
+  async signOn(@Body() registrationDTO: RegistrationDTO) {
     try {
-      return await this.authService.signIn(signInDTO);
+      return this.registrationService.signOn(registrationDTO);
     } catch (error) {
       throw new HttpException(
         {

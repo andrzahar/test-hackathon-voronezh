@@ -1,10 +1,12 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class Registration {
+export class RegistrationDTO {
   @IsNotEmpty()
   name: string;
   @IsNotEmpty()
   password: string;
   @IsNotEmpty()
-  phone: string;
+  telephone: string;
+  @IsNotEmpty()
+  login: string;
 }

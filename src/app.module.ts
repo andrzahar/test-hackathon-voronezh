@@ -5,13 +5,16 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './core/config/configuration';
 import { JwtModule } from '@nestjs/jwt';
-import process from 'process';
+import { RegistrationModule } from './core/registration/registration.module';
 
 @Module({
   imports: [
     AuthModule,
     UsersModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/'),
+    RegistrationModule,
+    MongooseModule.forRoot('mongodb://localhost:27017/', {
+      dbName: process.env.DATABASE_NAME,
+    }),
     ConfigModule.forRoot({
       load: [configuration],
     }),
