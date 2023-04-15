@@ -163,6 +163,8 @@ components:
     UserRegistration:
       type: object
       properties:
+        login:
+          type: string
         telephone:
           type: string
         password:
@@ -173,7 +175,7 @@ components:
     UserAuth:
       type: object
       properties:
-        telephone:
+        login:
           type: string
         password:
           type: string
