@@ -1,0 +1,215 @@
+openapi: 3.0.3
+info:
+  title: Test
+  version: 1.0.11
+paths:
+  /registration:
+    post:
+      summary: Add a new user
+      description: Add a new pet to the store
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: userKey
+                type: string
+        '405':
+          description: Invalid input
+  /auth:
+    post:
+      summary: Auth user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuth'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: userKey
+                type: string
+        '405':
+          description: Invalid input
+  /preferences:
+    get:
+      summary: Get all preferences
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Preference'
+        '405':
+          description: Invalid input
+  /user/preferences:
+    post:
+      summary: Set general preferences of user
+      parameters:
+        - name: userKey
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Preference'
+      responses:
+        '200':
+          description: successful operation
+        '405':
+          description: Invalid input
+  /user/adventure:
+    post:
+      summary: add user adventure
+      parameters:
+        - name: userKey
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: flight number
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlightInfo'
+        '405':
+          description: Invalid input
+  /user/adventure/preferences:
+    post:
+      summary: set user preferences for adventure
+      parameters:
+        - name: userKey
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: flightNumber
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Preference'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlightInfo'
+        '405':
+          description: Invalid input
+  /user/adventure/route:
+    get:
+      summary: get route
+      parameters:
+        - name: userKey
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: flightNumber
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '405':
+          description: Invalid input
+
+components:
+  schemas:
+    UserRegistration:
+      type: object
+      properties:
+        telephone:
+          type: string
+        password:
+          type: string
+          format: password
+        name:
+          type: string
+    UserAuth:
+      type: object
+      properties:
+        telephone:
+          type: string
+        password:
+          type: string
+          format: password
+    Preference:
+      type: object
+      properties:
+        name:
+          type: string
+    FlightInfo:
+      type: object
+      properties:
+        arrivalAirport:
+          type: string
+        arrivalTime:
+          type: string
+          format: date-time
+        departureAirport:
+          type: string
+        departureTime:
+          type: string
+          format: date-time
+    Location:
+      type: object
+      properties:
+        longitude:
+          type: string
+        latitude:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
