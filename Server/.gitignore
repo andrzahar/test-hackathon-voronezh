@@ -1,6 +1,7 @@
 # compiled output
 dist
-Server/node_modules
+node_modules
+../testHackathon_frontEnd
 
 # Logs
 logs
