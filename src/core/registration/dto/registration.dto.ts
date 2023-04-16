@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsPhoneNumber } from 'class-validator';
 
 export class RegistrationDTO {
   @IsNotEmpty()
@@ -6,6 +6,7 @@ export class RegistrationDTO {
   @IsNotEmpty()
   password: string;
   @IsNotEmpty()
+  @IsPhoneNumber()
   telephone: string;
   @IsNotEmpty()
   login: string;
