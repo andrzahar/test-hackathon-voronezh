@@ -7,11 +7,13 @@ import {
 } from '@nestjs/common';
 import { RegistrationService } from './registration.service';
 import { RegistrationDTO } from './dto/registration.dto';
+import { Public } from '../auth/auth.guard';
 
 @Controller('registration')
 export class RegistrationController {
   constructor(private registrationService: RegistrationService) {}
 
+  @Public()
   @Post()
   async signOn(@Body() registrationDTO: RegistrationDTO) {
     try {

@@ -7,11 +7,13 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signIn.dto';
+import { Public } from "./auth.guard";
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
   @Post()
+  @Public()
   async signIn(@Body() signInDTO: SignInDto) {
     try {
       return await this.authService.signIn(signInDTO);
