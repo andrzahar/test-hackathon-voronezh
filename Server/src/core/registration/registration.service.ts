@@ -12,7 +12,6 @@ export class RegistrationService {
   ) {}
 
   public async signOn(registrationDTO: RegistrationDTO) {
-    await validateOrReject(registrationDTO);
     const user = await this.usersService.create(registrationDTO);
     const payload = {
       login: user.login,

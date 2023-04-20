@@ -2,7 +2,7 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 
 export class UserErrorLoginException extends HttpException {
   constructor() {
-    super('This login is already taken, field: user', HttpStatus.BAD_REQUEST);
+    super('This login is already taken, field: user', HttpStatus.CONFLICT);
   }
 }
 
@@ -10,7 +10,7 @@ export class UserErrorPhoneException extends HttpException {
   constructor() {
     super(
       'Such a phone is already in use, field: user',
-      HttpStatus.BAD_REQUEST,
+      HttpStatus.CONFLICT,
     );
   }
 }
