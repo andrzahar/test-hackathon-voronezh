@@ -1,18 +1,93 @@
-const initialState={
-    personalData:{
-        name:'',
-        surName:'',
-        patronymic:''
-    },
-    auth:{
-        login:'',
-        password:''
+import axios from "axios";
+
+const ADD_USER = 'ADD_USER';
+const ENTER_USER = 'ENTER_USER';
+const CREATE_USER = 'CREATE_USER';
+
+
+const initialState = {
+    user: {
+        personalData: {
+            name: '',
+            surName: '',
+            patronymic: '',
+            login: '',
+            token: ''
+        }
     }
 }
 
-export const userReducer=(state=initialState, action)=>{
+export const userReducer = (state = initialState, action) => {
     switch (action.type) {
+        case ENTER_USER: {
+            const enterUser = async () => {
+                console.log(action.payload.login);
+                console.log(action.payload.password);
+                try {
+                    const resp = await axios.post('http://192.168.215.83:3000/api/auth',
+                        {
+                            login: action.payload.login,
+                            password: action.payload.password
+                        }
+                    )
+                    console.log(resp)
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+            enterUser();
+            return state;
+        }
+        case CREATE_USER: {
+            return {
+                ...state, user: [...state.user, {
+                    personalData: {
+                        login: action.payload.login,
+                        password: action.payload.password
+                    }
+                }]
+            }
+        }
+
+        case ADD_USER: {
+
+            const regUser = async () => {
+                try {
+                    const resp = await axios.post('/registration',
+                        {
+                            params: {
+                                log: action.payload.login,
+                                password: action.payload.password
+                            }
+                        })
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+            const addUser = async () => {
+                try {
+                    const resp = await axios.post('/registration',
+                        {
+                            params: {
+                                name: action.payload.name,
+                                telephone: action.payload.telephone
+                            }
+                        })
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+            regUser();
+            addUser();
+            return state;
+        }
         default:
             return state;
     }
 }
+
+export const enterUser = (login, password) => ({type: ENTER_USER, payload: {password, login}})
+export const addUser = (login, password, name, telephone) => ({
+    type: ADD_USER,
+    payload: {password, login, name, telephone}
+})

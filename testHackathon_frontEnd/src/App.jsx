@@ -1,12 +1,12 @@
-import {useDispatch} from "react-redux";
-import {store} from "./store/index.js";
-import Authorization from "./components/Authorization/Authorization.jsx";
+import Header from "./components/Header/Header.jsx";
+import './index.css';
+import { RenderRoutes } from "./routes/RenderRoutes.jsx";
 
 function App() {
-    // console.log(store.getState())
   return (
     <div>
-      <Authorization/>
+      <Header/>
+      <RenderRoutes/>
     </div>
   )
 }

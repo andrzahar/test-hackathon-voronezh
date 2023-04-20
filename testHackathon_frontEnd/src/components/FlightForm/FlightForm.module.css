@@ -1,0 +1,45 @@
+.wrapper{
+    border: 3px black solid;
+    border-radius: 10px;
+    min-height: 100px;
+    width: 65%;
+    margin: auto;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrapper + .wrapper {
+    margin-top: 20px;
+}
+.findBtn{
+    height: 50%;
+}
+.line{
+    flex:1;
+    height: 100px;
+    max-width: 1px;
+    border: 2px grey dashed;
+}
+.info{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: space-between;
+    margin: auto;
+}
+.waitingTime{
+    color: grey;
+    margin:0;
+}
+.mapLink{
+    color: #0d6dfb;
+    text-decoration: none;
+    cursor: pointer;
+}
+input:invalid{
+    outline-color: red ;
+    color: red;
+}
