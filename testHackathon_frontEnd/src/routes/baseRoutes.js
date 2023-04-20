@@ -16,4 +16,9 @@ export const AUTH_ROUTES = [
         name: 'Авторизация',
         Element: Authorization,
     },
+    {
+        path: ROUTE_MAIN_CONTAINER,
+        name: 'Главное меню',
+        Element: MainContainer,
+    },
 ]

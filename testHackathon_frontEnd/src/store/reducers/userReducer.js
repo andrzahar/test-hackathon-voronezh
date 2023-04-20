@@ -38,14 +38,15 @@ export const userReducer = (state = initialState, action) => {
             enterUser();
             return state;
         }
+
         case CREATE_USER: {
             return {
-                ...state, user: [...state.user, {
+                ...state, user: {
                     personalData: {
                         login: action.payload.login,
                         password: action.payload.password
                     }
-                }]
+                }
             }
         }
 
@@ -53,30 +54,35 @@ export const userReducer = (state = initialState, action) => {
 
             const regUser = async () => {
                 try {
-                    const resp = await axios.post('/registration',
+                    console.log('log:',state.user.personalData.login,
+                        'password:', state.user.personalData.password,
+                        'name:', action.payload.name,
+                        'telephone:', action.payload.telephone
+                        )
+                    const resp = await axios.post('http://192.168.215.83:3000/api/registration',
                         {
-                            params: {
-                                log: action.payload.login,
-                                password: action.payload.password
-                            }
+                                login: state.user.personalData.login,
+                                password: state.user.personalData.password,
+                                name: action.payload.name,
+                                telephone: action.payload.telephone
                         })
-                } catch (e) {
-                    console.log(e);
-                }
-            }
-            const addUser = async () => {
-                try {
-                    const resp = await axios.post('/registration',
-                        {
-                            params: {
+                    console.log(resp);
+                    return {
+                        ...state,
+                        user: {
+                            ...state.user,
+                            personalData: {
+                                ...state.user.personalData,
                                 name: action.payload.name,
                                 telephone: action.payload.telephone
                             }
-                        })
+                        }
+                    }
                 } catch (e) {
                     console.log(e);
                 }
             }
+
             regUser();
             addUser();
             return state;
@@ -87,7 +93,9 @@ export const userReducer = (state = initialState, action) => {
 }
 
 export const enterUser = (login, password) => ({type: ENTER_USER, payload: {password, login}})
-export const addUser = (login, password, name, telephone) => ({
+
+export const createUser = (login, password) => ({type: CREATE_USER, payload: {password, login}})
+export const addUser = (name, telephone) => ({
     type: ADD_USER,
-    payload: {password, login, name, telephone}
+    payload: {name, telephone}
 })
