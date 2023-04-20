@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { User, UserDocument } from '../schemas/user.schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { RegistrationDTO } from '../registration/dto/registration.dto';
 import {
@@ -56,6 +56,14 @@ export class UsersService {
       return existing;
     }
 
+    return user.save();
+  }
+
+  async updatePreferences(
+    user: UserDocument,
+    userPreferences: string[],
+  ): Promise<UserDocument> {
+    user.preference = userPreferences;
     return user.save();
   }
 }
