@@ -6,6 +6,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {store} from "../../store/index.js";
 import {addFlight, getWaitTime} from "../../store/reducers/flightReducer.js";
 import Map from 'react-map-gl';
+import Preferences from "../Preferences/Preferences.jsx";
+import {getCategories} from "../../store/reducers/pointReducer.js";
+
 
 const Main = (props) => {
     const dispatch = useDispatch();
@@ -15,9 +18,10 @@ const Main = (props) => {
     // const state=useSelector(state=>state.flight);
     // console.log(state);
     console.log(props.flight);
-
+    dispatch(getCategories());
     return (
         <div>
+            <Preferences/>
             <h2 className={classes.title}>
                 Введите информацию о рейсах
             </h2>

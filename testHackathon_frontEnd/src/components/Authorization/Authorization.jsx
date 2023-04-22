@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useMemo, useState} from "react";
 import Modal from "../Modal/Modal.jsx";
 import ModalReg from "../Modal/Modal.jsx";
-import {enterUser} from "../../store/reducers/userReducer.js";
+import {createUser, enterUser} from "../../store/reducers/userReducer.js";
 
 const Authorization = () => {
     const [auth, setAuth] = useState(true);
@@ -16,13 +16,19 @@ const Authorization = () => {
     // const dispatch=useSelector(state => state.user);
 
     // useEffect(() , modal)
-
+    // const userData={
+    //     log:'',
+    //     password:'',
+    //     name: '',
+    //     telephone: ''
+    // }
 
     const closeModal = () => {
         setModal(false);
     }
 
     const checkAuthUser = () => {
+        console.log('log');
         if (login != null && password != null) {
             dispatch(enterUser(login, password));
         }
@@ -30,7 +36,7 @@ const Authorization = () => {
 
     const regAuthUser = () => {
         if (login != null && password != null) {
-            dispatch(enterUser(login, password));
+            dispatch(createUser(login, password));
             setModal(true);
         };
 
