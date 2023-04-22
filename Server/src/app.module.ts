@@ -8,17 +8,18 @@ import { JwtModule } from '@nestjs/jwt';
 import { RegistrationModule } from './core/registration/registration.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './core/auth/auth.guard';
-import { FlightsModule } from './core/flights/flights.module';
-import { PlacesModule } from './core/places/places.module';
 
 @Module({
   imports: [
     AuthModule,
     UsersModule,
     RegistrationModule,
-    FlightsModule,
-    PlacesModule,
-    MongooseModule.forRoot('mongodb://localhost:27017', { dbName: 'HACKATON' }),
+    MongooseModule.forRoot(
+      `mongodb://${process.env.DATABASE_LOCAL_DOMAIN}:${process.env.DATABASE_LOCAL_PORT}`,
+      {
+        dbName: process.env.DATABASE_NAME,
+      },
+    ),
     ConfigModule.forRoot({
       load: [configuration],
     }),

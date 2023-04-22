@@ -6,7 +6,7 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-  @Post('preference')
+  @Post('preferences')
   @HttpCode(200)
   public async updatePreference(
     @Body() body: { preferences: string[]; user: UserDocument },

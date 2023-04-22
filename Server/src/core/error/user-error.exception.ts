@@ -8,10 +8,7 @@ export class UserErrorLoginException extends HttpException {
 
 export class UserErrorPhoneException extends HttpException {
   constructor() {
-    super(
-      'Such a phone is already in use, field: user',
-      HttpStatus.CONFLICT,
-    );
+    super('Such a phone is already in use, field: user', HttpStatus.CONFLICT);
   }
 }
 

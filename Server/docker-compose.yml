@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+  main:
+    container_name: auth-app
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "5000:5000"
+      - "9229:9229"
+    command:
+      - npm run start
+    depends_on:
+      - mongo
+    restart: always
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    restart: always
+
+volumes:
+  mongodb-data:
