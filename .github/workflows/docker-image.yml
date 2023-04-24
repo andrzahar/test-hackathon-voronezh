@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker frontend image
+      run: docker compose -f ~/test-hackathon-voronezh/testHackathon_frontEnd/docker-compose.yml up
+      
+    - uses: actions/checkout@v3
+    - name: Build the Docker backend image
+      run: docker compose -f ~/test-hackathon-voronezh/Server/docker-compose.yml up
