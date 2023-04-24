@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { getRoutesByAuth } from "./common/getRoutesByAuth";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ROUTE_AUTH, ROUTE_MAIN_CONTAINER } from "./routes.js";
-import { getAuthUser } from "./selectors/authSelector.js";
+import { getAuthUser } from "../store/selectors/authSelector.js";
 import { connect } from "react-redux";
 
 const RenderRoutesWithoutStore = ({ user }) => {

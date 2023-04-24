@@ -21,8 +21,6 @@ export const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case ENTER_USER: {
             const enterUser = async () => {
-                console.log(action.payload.login);
-                console.log(action.payload.password);
                 try {
                     const resp = await axios.post('http://91.142.72.178:5000/api/auth',
                         {
@@ -30,7 +28,7 @@ export const userReducer = (state = initialState, action) => {
                             password: action.payload.password
                         }
                     )
-                    console.log(resp)
+                    state.user.personalData.token = resp.data;
                 } catch (e) {
                     console.log(e);
                 }
