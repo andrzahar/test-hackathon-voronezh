@@ -16,7 +16,7 @@ export const pointReducer=(state=initialState, action)=>{
 
             const get= async ()=>{
                 console.log('getC')
-                const respC=await axios.get(`http://192.168.215.83:3000/api/places:Moscow`)
+                const respC=await axios.get(`http://91.142.72.178:5000/api/places:Moscow`)
                 console.log(respC)
 
 

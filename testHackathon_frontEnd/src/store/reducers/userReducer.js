@@ -24,7 +24,7 @@ export const userReducer = (state = initialState, action) => {
                 console.log(action.payload.login);
                 console.log(action.payload.password);
                 try {
-                    const resp = await axios.post('http://192.168.215.83:3000/api/auth',
+                    const resp = await axios.post('http://91.142.72.178:5000/api/auth',
                         {
                             login: action.payload.login,
                             password: action.payload.password
@@ -59,7 +59,7 @@ export const userReducer = (state = initialState, action) => {
                         'name:', action.payload.name,
                         'telephone:', action.payload.telephone
                         )
-                    const resp = await axios.post('http://192.168.215.83:3000/api/registration',
+                    const resp = await axios.post('http://91.142.72.178:5000/api/registration',
                         {
                                 login: state.user.personalData.login,
                                 password: state.user.personalData.password,
