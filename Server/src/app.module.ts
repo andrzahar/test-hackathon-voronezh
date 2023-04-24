@@ -9,18 +9,19 @@ import { RegistrationModule } from './core/registration/registration.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './core/auth/auth.guard';
 import { MongooseConfigService } from './core/config/MongooseConfigService';
+
 @Module({
   imports: [
     AuthModule,
     UsersModule,
     RegistrationModule,
-    // MongooseModule.forRootAsync({
-    //   imports: [ConfigModule],
-    //   useClass: MongooseConfigService,
-    // }),
-    MongooseModule.forRoot(`mongodb://${process.env.MONGODB_URL}}`, {
-      dbName: process.env.DATABASE_NAME,
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useClass: MongooseConfigService,
     }),
+    // MongooseModule.forRoot(process.env.MONGODB_URL, {
+    //   dbName: process.env.DATABASE_NAME,
+    // }),
     ConfigModule.forRoot({
       envFilePath: '.env',
       load: [configuration],

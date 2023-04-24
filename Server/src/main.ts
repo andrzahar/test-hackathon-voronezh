@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
-  const uri = `mongodb://${process.env.MONGODB_URL}`;
+  const uri = process.env.MONGODB_URL;
   console.log(uri);
   await app.listen(PORT, () => console.log(`Server started on port = ${PORT}`));
 }

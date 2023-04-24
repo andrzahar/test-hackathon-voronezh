@@ -15,19 +15,19 @@ services:
       - "9229:9229"
     command:
       - npm run start
-    depends_on:
-      - mongo
+#    depends_on:
+#      - mongo
     restart: always
-  mongo:
-    container_name: mongo
-    image: mongo:latest
-    env_file:
-      - .env
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb-data:/data/db
-    restart: always
-
-volumes:
-  mongodb-data:
+#  mongo:
+#    container_name: mongo
+#    image: mongo:latest
+#    env_file:
+#      - .env
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - mongodb-data:/data/db
+#    restart: always
+#
+#volumes:
+#  mongodb-data:
