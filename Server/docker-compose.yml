@@ -13,8 +13,7 @@ services:
     ports:
       - "5000:5000"
       - "9229:9229"
-    command:
-      - npm run start
+    command: npm run start
 #    depends_on:
 #      - mongo
     restart: always
