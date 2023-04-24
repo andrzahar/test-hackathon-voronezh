@@ -9,6 +9,7 @@ import {
 import { RegistrationService } from './registration.service';
 import { RegistrationDTO } from './dto/registration.dto';
 import { Public } from '../auth/auth.guard';
+import { validateOrReject } from 'class-validator';
 
 @Controller('api/registration')
 export class RegistrationController {
@@ -19,6 +20,7 @@ export class RegistrationController {
   @Post()
   async signOn(@Body() registrationDTO: RegistrationDTO) {
     try {
+      await validateOrReject(registrationDTO);
       console.table(registrationDTO);
       return this.registrationService.signOn(registrationDTO);
     } catch (error) {
