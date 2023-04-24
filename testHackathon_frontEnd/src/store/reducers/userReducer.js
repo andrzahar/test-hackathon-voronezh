@@ -21,16 +21,14 @@ export const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case ENTER_USER: {
             const enterUser = async () => {
-                console.log(action.payload.login);
-                console.log(action.payload.password);
                 try {
-                    const resp = await axios.post('http://192.168.215.83:3000/api/auth',
+                    const resp = await axios.post('http://91.142.72.178:5000/api/auth',
                         {
                             login: action.payload.login,
                             password: action.payload.password
                         }
                     )
-                    console.log(resp)
+                    state.user.personalData.token = resp.data;
                 } catch (e) {
                     console.log(e);
                 }
@@ -59,7 +57,7 @@ export const userReducer = (state = initialState, action) => {
                         'name:', action.payload.name,
                         'telephone:', action.payload.telephone
                         )
-                    const resp = await axios.post('http://192.168.215.83:3000/api/registration',
+                    const resp = await axios.post('http://91.142.72.178:5000/api/registration',
                         {
                                 login: state.user.personalData.login,
                                 password: state.user.personalData.password,

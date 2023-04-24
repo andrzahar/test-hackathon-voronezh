@@ -3,7 +3,7 @@
     margin-bottom: 100px;
 }
 .plus{
-    margin: -50px auto 0 auto;
+    margin: 0 auto 0 auto;
     width: 53%;
     color: grey;
     /*margin: auto;*/
@@ -12,4 +12,10 @@
 .plus> svg:hover{
     color: #0d6dfb;
     cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+    .plus{
+        width: 53%;
+    }
 }

@@ -44,10 +44,10 @@ function ModalReg({closeModal}) {
                                       value={tel} onChange={(e)=>setTel(e.currentTarget.value)}
                         />
                     </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Предпочтения</Form.Label>
-                        <Form.Control type="text" placeholder="Выбирете предпочтения"/>
-                    </Form.Group>
+                    {/*<Form.Group className="mb-3">*/}
+                    {/*    <Form.Label>Предпочтения</Form.Label>*/}
+                    {/*    <Form.Control type="text" placeholder="Выбирете предпочтения"/>*/}
+                    {/*</Form.Group>*/}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => closeModal()}>Закрыть</Button>

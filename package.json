@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@nestjs/axios": "^2.0.0",
-    "@nestjs/core": "^9.4.0",
-    "axios": "^1.3.6"
-  }
-}

@@ -1,4 +1,4 @@
-.authorization{
+.authorization {
     display: flex;
     width: 70%;
     padding: 50px;
@@ -6,19 +6,60 @@
     border-radius: 20px;
     margin: auto;
 }
-.form{
-    padding:0 20px;
-    flex:1;
+
+.form {
+    padding: 0 20px;
+    flex: 1;
 }
-.infoCard_signIn{
-    flex:1;
+
+.infoCard_signIn {
+    flex: 1;
     text-align: center;
     display: flex;
     align-items: center;
-    padding:0 20px;
+    padding: 0 20px;
 }
-.welcomeTitle{
+
+.welcomeTitle {
     margin-bottom: 40px;
 }
-.textWrapper{
+
+.textWrapper {
+}
+
+@media screen and (max-width: 720px) {
+    .text {
+        display: none;
+    }
+
+    .welcomeTitle {
+        display: none;
+    }
+    .authorization{
+        width: 90%;
+        flex-direction: column;
+
+    }
+    .form{
+        /*justify-content: center;*/
+        position: relative;
+        margin-top: 50px;
+    }
+    .btnTel{
+        margin: 20px 0;
+    }
+    .infoCard_signIn{
+        justify-content: center;
+    }
+    .btnTelIn{
+        position: absolute;
+        left: 90px;
+        top: 60px;
+    }
+    /*.btnTelIn:before{*/
+    /*    content: '<-';*/
+    /*    position: absolute;*/
+    /*    top:5px;*/
+    /*    left: -8px;*/
+    /*}*/
 }

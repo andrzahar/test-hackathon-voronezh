@@ -38,7 +38,8 @@ const Authorization = () => {
         if (login != null && password != null) {
             dispatch(createUser(login, password));
             setModal(true);
-        };
+        }
+        ;
 
     }
 
@@ -52,7 +53,7 @@ const Authorization = () => {
                             <Form className={classes.form}>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>Логин</Form.Label>
-                                    <Form.Control type="email" placeholder="Введите логин"
+                                    <Form.Control type="text" placeholder="Введите логин"
                                                   value={login} onChange={(e) => setLogin(e.currentTarget.value)}
                                     />
                                 </Form.Group>
@@ -64,6 +65,7 @@ const Authorization = () => {
                                 </Form.Group>
                                 <Button variant="primary" type="submit"
                                         onClick={() => checkAuthUser()}
+                                        className={classes.btn}
                                 >
                                     Войти
                                 </Button>
@@ -76,7 +78,9 @@ const Authorization = () => {
                                     <p className={classes.text}>
                                         Какой-то текст про то как классно будет если ты войдешь
                                     </p>
-                                    <Button onClick={() => setAuth(false)}>Зарегестрироваться</Button>
+                                    <Button onClick={() => setAuth(false)}
+                                            className={classes.btnTel}
+                                    >Зарегестрироваться</Button>
                                 </div>
                             </div>
                         </div>
@@ -91,13 +95,15 @@ const Authorization = () => {
                                     <p className={classes.text}>
                                         Какой-то текст про то как классно будет если ты войдешь
                                     </p>
-                                    <Button onClick={() => setAuth(true)}>Войти</Button>
+                                    <Button onClick={() => setAuth(true)}
+                                            className={classes.btnTelIn}
+                                    >Войти</Button>
                                 </div>
                             </div>
                             <Form className={classes.form}>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>Логин</Form.Label>
-                                    <Form.Control type="email" placeholder="Введите логин"
+                                    <Form.Control type="text" placeholder="Введите логин"
                                                   value={login} onChange={(e) => setLogin(e.currentTarget.value)}
                                     />
                                 </Form.Group>
@@ -110,6 +116,7 @@ const Authorization = () => {
                                 </Form.Group>
                                 <Button variant="primary"
                                         onClick={() => regAuthUser()}
+                                        className={classes.btnTel}
                                 >
                                     Зарегестрироваться
                                 </Button>

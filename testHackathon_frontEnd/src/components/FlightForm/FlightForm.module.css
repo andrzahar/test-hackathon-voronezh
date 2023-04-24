@@ -43,3 +43,15 @@ input:invalid{
     outline-color: red ;
     color: red;
 }
+
+@media screen and (max-width: 1024px) {
+    .wrapper{
+        flex-direction: column;
+    }
+    .line{
+        height: 150px;
+    }
+    .waitingTime{
+        margin-left: 30px;
+    }
+}
