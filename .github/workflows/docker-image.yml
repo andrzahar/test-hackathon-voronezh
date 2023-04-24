@@ -24,5 +24,5 @@ jobs:
         passphrase: ${{ secrets.SERVER_PASSPHRASE }}
         script: |
           sudo git --git-dir ~/test-hackathon-voronezh/.git pull
-          sudo docker compose -f ~/test-hackathon-voronezh/Server/docker-compose.yml up
-          sudo docker compose -f ~/test-hackathon-voronezh/testHackathon_frontEnd/docker-compose.yml up
+          sudo docker compose -f ~/test-hackathon-voronezh/Server/docker-compose.yml up -d
+          sudo docker compose -f ~/test-hackathon-voronezh/testHackathon_frontEnd/docker-compose.yml up -d
