@@ -5,15 +5,20 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
-jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
     
+jobs:
+  # JOB to run change detection
+  changes:
+    runs-on: ubuntu-latest
+    # Required permissions
+    permissions:
+      pull-requests: read
+    # Set job outputs to values from filter step
+    outputs:
+      backend: ${{ steps.filter.outputs.backend }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+    steps:
+    # For pull requests it's not necessary to checkout the code
     - uses: dorny/paths-filter@v2
       id: filter
       with:
@@ -23,40 +28,46 @@ jobs:
           frontend:
             - 'testHackathon_frontEnd/**'
 
-    # run only if 'backend' files were changed
-    - name: backend
-      uses: appleboy/ssh-action@master
-      if: steps.filter.outputs.backend == 'true'
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        password: ${{ secrets.SERVER_PASSWORD }}
-        key: ${{ secrets.SERVER_KEY }}
-        port: ${{ secrets.SERVER_PORT }}
-        passphrase: ${{ secrets.SERVER_PASSPHRASE }}
-        script: |
-          rm -rf /root/test/
-          mkdir /root/test/
-          cd /root/test/
-          sudo git init
-          sudo git clone https://github.com/andrzahar/test-hackathon-voronezh
-          sudo docker compose -f /root/test/test-hackathon-voronezh/Server/docker-compose.yml up -d --force-recreate --no-deps --build
+  # JOB to build and test backend code
+  backend:
+    needs: changes
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          key: ${{ secrets.SERVER_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          passphrase: ${{ secrets.SERVER_PASSPHRASE }}
+          script: |
+            rm -rf /root/test/
+            mkdir /root/test/
+            cd /root/test/
+            sudo git init
+            sudo git clone https://github.com/andrzahar/test-hackathon-voronezh
+            sudo docker compose -f /root/test/test-hackathon-voronezh/Server/docker-compose.yml up -d --force-recreate --no-deps --build
 
-    # run only if 'frontend' files were changed
-    - name: frontend
-      uses: appleboy/ssh-action@master
-      if: steps.filter.outputs.frontend == 'true'
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        password: ${{ secrets.SERVER_PASSWORD }}
-        key: ${{ secrets.SERVER_KEY }}
-        port: ${{ secrets.SERVER_PORT }}
-        passphrase: ${{ secrets.SERVER_PASSPHRASE }}
-        script: |
-          rm -rf /root/test/
-          mkdir /root/test/
-          cd /root/test/
-          sudo git init
-          sudo git clone https://github.com/andrzahar/test-hackathon-voronezh
-          sudo docker compose -f /root/test/test-hackathon-voronezh/testHackathon_frontEnd/docker-compose.yml up -d --force-recreate --no-deps --build
+  # JOB to build and test frontend code
+  frontend:
+    needs: changes
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          key: ${{ secrets.SERVER_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          passphrase: ${{ secrets.SERVER_PASSPHRASE }}
+          script: |
+            rm -rf /root/test/
+            mkdir /root/test/
+            cd /root/test/
+            sudo git init
+            sudo git clone https://github.com/andrzahar/test-hackathon-voronezh
+            sudo docker compose -f /root/test/test-hackathon-voronezh/testHackathon_frontEnd/docker-compose.yml up -d --force-recreate --no-deps --build
