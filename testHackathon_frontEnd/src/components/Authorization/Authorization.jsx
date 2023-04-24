@@ -76,7 +76,7 @@ const Authorization = () => {
                                         Приветсвие
                                     </h2>
                                     <p className={classes.text}>
-                                        Какой-то текст про то как классно будет если ты войдешь (нет!)
+                                        Какой-то текст про то как классно будет если ты войдешь
                                     </p>
                                     <Button onClick={() => setAuth(false)}
                                             className={classes.btnTel}
