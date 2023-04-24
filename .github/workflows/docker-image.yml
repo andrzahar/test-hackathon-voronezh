@@ -25,7 +25,7 @@ jobs:
 
     # run only if 'backend' files were changed
     - name: backend
-    - uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@master
       if: steps.filter.outputs.backend == 'true'
       with:
         host: ${{ secrets.SERVER_HOST }}
@@ -44,7 +44,7 @@ jobs:
 
     # run only if 'frontend' files were changed
     - name: frontend
-    - uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@master
       if: steps.filter.outputs.frontend == 'true'
       with:
         host: ${{ secrets.SERVER_HOST }}
