@@ -23,10 +23,6 @@ services:
     image: mongo:latest
     env_file:
       - .env
-    environment:
-      CONFIG_MONGODB_ADMINUSERNAME: admin
-      CONFIG_MONGODB_ADMINPASSWORD: admin
-      CONFIG_MONGODB_URL: mongodb://admin:admin@mongo:27017/
     ports:
       - "27017:27017"
     volumes:
